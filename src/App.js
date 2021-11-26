@@ -1,5 +1,6 @@
 import React, { useState, useEffect }from 'react';
 import "./index.css"
+import SearchForm from './SearchForm';
 
 const App = () => {
   const [articles, setArticles] = useState([])
@@ -14,29 +15,30 @@ const App = () => {
           `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${term}&api-key=${process.env.REACT_APP_ARTICLES_API_KEY}
           `)
           const articles = await res.json()
-          console.log(articles.response.docs);
           setArticles(articles.response.docs)
+          console.log(articles.response.docs);
+          setIsLoading(false)
       } catch (error) {
       console.error(error);
     }
   }
 
     fetchArticles()
-  }, [])
+  }, [term])
 
   return (
     <>
       <div className="showcase">
         <div className="overlay">
           <h1 className="viewArticlesAbout">Viewing articles about {term}</h1>
-          {/* form */}
+          <SearchForm searchText={(text) => setTerm(text)} />
         </div>
       </div>
 
-
-
-
-      <section className="section">
+      {isLoading ? (
+        <h1 className="loading">Loading...</h1>
+       ) : (
+        <section className="section">
         {articles.map((article) => {
           const {abstract, headline: { main }, byline:{original}, lead_paragraph, news_desk, section_name, web_url, _id, word_count} = article
 
@@ -58,7 +60,8 @@ const App = () => {
           )
 
         })}
-      </section>
+      </section>)}
+      
     </>
   );
 }

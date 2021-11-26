@@ -31,6 +31,7 @@ body {
   color: white;
   text-align: center;
   margin-bottom: 4px;
+  text-transform: capitalize;
 }
 
 .section {
@@ -54,4 +55,28 @@ body {
 
 .entire-list-item {
   font: bold;
+}
+
+.searchBar {
+  padding: 2px 5px;
+}
+
+.searchButton {
+  background-color: lightgreen;
+  padding: 2px 5px;
+  border-radius: 1px;
+  color: white;
+}
+
+.loading {
+  text-align: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+@media (min-width: 1024px) {
+  .showcase {
+    background: url("https://images.pexels.com/photos/723072/pexels-photo-723072.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500")
+      no-repeat center/cover;
+  }
 }
